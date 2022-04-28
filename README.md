@@ -13,7 +13,7 @@ The MyGameState constructor when called initialises a set of fields passed in by
 
 
 ### Getters
-The task of the getters is to return the correct values based on the game state, most getters calculate and return these values within the function however getMrXTravelLog, getWinner and getAvailableMoves rely on other  functions to calculate their returned values, these other functions are called and local attributes assigned a value in the constructor for  getWinner and getAvailable moves while for getMrXTravelLog it is  in the advance method.
+The task of the getters is to return the correct values based on the game state, most getters calculate and return these values within the function however getMrXTravelLog, getWinner and getAvailableMoves rely on other functions to calculate their returned values, these other functions are called in the constructor for getWinner and getAvailable moves, and in the advance method for getMrXTravelLog.
 
 
 ### Available Moves 
