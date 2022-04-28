@@ -9,9 +9,8 @@ import uk.ac.bris.cs.scotlandyard.model.Board.GameState;
 import uk.ac.bris.cs.scotlandyard.model.Piece.*;
 import uk.ac.bris.cs.scotlandyard.model.ScotlandYard.*;
 
-// START GAMESTATE
+// START FACTORY
 public final class MyGameStateFactory implements Factory<GameState> {
-	// START CONSTRUCTOR
 
 	private final class MyGameState implements GameState {
 
@@ -26,8 +25,7 @@ public final class MyGameStateFactory implements Factory<GameState> {
 		private ImmutableSet<Piece> winner;
 		// END ATTRIBUTES
 
-		// START INITIALISATION
-
+		// START CONSTRUCTOR
 		private MyGameState(
 
 				// Initial parameters
@@ -87,8 +85,6 @@ public final class MyGameStateFactory implements Factory<GameState> {
 					throw new IllegalArgumentException("Empty graph!");
 
 				// END CHECKS
-
-				// END INITIALISATION
 
 				// Initialised the local attributes
 				this.setup      = setup;
@@ -234,7 +230,7 @@ public final class MyGameStateFactory implements Factory<GameState> {
 		public GameState advance(Move move) {
 
 			// Check is that the provided move is indeed valid
-			if(!moves.contains(move)) throw new IllegalArgumentException("Illegal move: "+move); // check if the move is possible or not
+			if(!moves.contains(move)) throw new IllegalArgumentException("Illegal move: "+move);
 
 			// Store current mrX
 			Player newMrX = mrX;
@@ -250,7 +246,11 @@ public final class MyGameStateFactory implements Factory<GameState> {
 				var newLog = new ArrayList<LogEntry>(log);
 
 				// Get detective pieces for MyGameState
-				List<Piece> allDetectives = detectives.stream().filter(p -> p.isDetective()).map(p -> p.piece()).collect(Collectors.toList());
+				List<Piece> allDetectives = detectives
+						.stream()
+						.filter(p -> p.isDetective())
+						.map(p -> p.piece())
+						.collect(Collectors.toList());
 
 				// Add their move(s) to the log
 				newLog.addAll(logEntriesAfterMove(setup, log, move));
@@ -273,7 +273,10 @@ public final class MyGameStateFactory implements Factory<GameState> {
 
 				// Store list of detectives who did not make a move
 				Player finalNewDetective = newDetective;
-				List<Player> newDetectives = detectives.stream().filter(detective -> detective != finalNewDetective).collect(Collectors.toList());
+				List<Player> newDetectives = detectives
+						.stream()
+						.filter(detective -> detective != finalNewDetective)
+						.collect(Collectors.toList());
 
 				// Move the detective to their new destination
 				newDetective = newDetective.at(newLocation);
@@ -287,7 +290,11 @@ public final class MyGameStateFactory implements Factory<GameState> {
 				newDetectives.add(newDetective);
 
 				// convert Piece list of remaining players to Player list remaining players to check for swap to Mr X turn
-				List<Piece> newRemaining = remaining.stream().filter(p -> p != move.commencedBy()).collect(Collectors.toList());
+				List<Piece> newRemaining = remaining
+						.stream()
+						.filter(p -> p != move.commencedBy())
+						.collect(Collectors.toList());
+
 				var remainingPlayers = new ArrayList<Player>();
 				for(Piece piece : newRemaining)
 					remainingPlayers.add(playerFromPiece(piece));
@@ -314,15 +321,16 @@ public final class MyGameStateFactory implements Factory<GameState> {
 		@Override
 		public ImmutableSet<Move> getAvailableMoves() { return moves; }
 
-		// END GETTERS
-
 		// Return Player from corresponding Piece
 		private Player playerFromPiece(Piece piece){
 
 			var allPlayers = new ArrayList<Player>(detectives);
 			allPlayers.add(mrX);
 			var immutableAllPlayers= ImmutableList.copyOf(allPlayers);
-			return immutableAllPlayers.stream().filter(p -> p.piece() == piece).findFirst().get();
+			return immutableAllPlayers
+					.stream()
+					.filter(p -> p.piece() == piece)
+					.findFirst().get();
 		}
 
 		// Return available moves of corresponding list of players
@@ -337,6 +345,8 @@ public final class MyGameStateFactory implements Factory<GameState> {
 
 			return ImmutableSet.copyOf(allMoves);
 		}
+
+		// END GETTERS
 	}
 	// END CONSTRUCTOR
 
@@ -487,4 +497,4 @@ public final class MyGameStateFactory implements Factory<GameState> {
 		return new MyGameState(setup, ImmutableSet.of(MrX.MRX), ImmutableList.of(), mrX, detectives);
 	}
 }
-// END GAME STATE
+// END FACTORY
