@@ -5,11 +5,11 @@ The Scotland Yard Project is a piece of summative coursework set by COMS10017 su
 
 
 ### Implementation
-Our base code implements the Factory<GameState> interface through the MyGameStateFactory class with an inner class MyGameState that extends Board and thus implements 7 inherited methods and a further advance method, of which a new instance is initialised by the build method of the outer class MyGameStateFactory that calls the constructor of MyGameState. 
+Our base code implements the Factory<GameState> interface through the MyGameStateFactory class with an inner class MyGameState that extends Board and thus implements 7 inherited methods and a further advance method, of which a new instance is initialized by the build method of the outer class MyGameStateFactory that calls the constructor of MyGameState. 
 
 
 ### Initialisation
-The MyGameState constructor when called initialises a set of fields passed in by parameters with appropriate checks. Our getter methods also contain certain checks on their inputs.
+The MyGameState constructor initializes a set of fields passed in by parameters with appropriate checks. Our getter methods also contain certain checks on their inputs.
 
 
 ### Getters
