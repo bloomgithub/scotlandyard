@@ -17,7 +17,7 @@ The task of the getters is to return the correct values based on the game state,
 
 
 ### Available Moves 
-The task of the getAvailableMoves getter is to return all the available moves that all players have in the game as an ImmutableSet of Move objects, in order to return the correct value two helper functions makeSingleMoves and makeDoubleMoves are created that generate sets of objects representing all the possible moves of their respective type (single, double) that inputed Player can make . These functions are used in a loop located in the constructor that tallies all possible moves of all remaining players in game and is set to the local attribute moves that is returned by getAvailableMoves.
+The task of the getAvailableMoves getter is to return all the available moves that all players have in the game as an ImmutableSet of Move objects, in order to return the correct value two helper functions makeSingleMoves and makeDoubleMoves are created that generate sets of objects representing all the possible moves of their respective type that an inputed Player can make. These functions are used in a loop located in the constructor that tallies all possible moves of all remaining players in game and is set to the local attribute moves that is returned by getAvailableMoves.
 
 
 ### Advance 
